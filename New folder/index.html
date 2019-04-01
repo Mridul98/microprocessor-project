@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js"></script>
+</head>
+<script>
+    window.onload = function () {
+    var chartContainer = document.getElementById('chartContainer');
+    var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "Temparature data"
+	},
+    axisX:{
+		title: "time"
+	},
+	axisY:{
+        title: "temparature",
+		includeZero: false
+	},
+	data: [{   
+        xValueFormatString:"HH mm s",     
+		type: "line",       
+		dataPoints: [
+            {x:new Date(),y:100}
+			
+		]
+	}]
+});
+
+
+addDataPoints();
+ 
+setInterval(addDataPoints,2000);
+
+function addDataPoints() {
+	var xVal = new Date();
+    var date = xVal.toLocaleString(); 
+    var yVal = Math.random()*100;
+	
+	chart.options.data[0].dataPoints.push({x:xVal,y: yVal});
+    chart.render();
+    
+
+    console.log(xVal.toString());
+    console.log(yVal);
+   // console.log(chart.options.data[0].dataPoints);
+	
+	
+}
+
+}
+
+
+
+</script>
+<body>
+    <div id="chartContainer">
+
+    </div>
+    
+</body>
+</html>
